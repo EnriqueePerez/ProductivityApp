@@ -1,10 +1,13 @@
-import './App.css';
-
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import HomePage from './pages/Homepage';
 function App() {
   return (
-    <div className='bg-red-500'>
-      <p className='text-center'>Hola</p>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path='/' component={HomePage} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
