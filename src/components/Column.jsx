@@ -1,11 +1,10 @@
 import React from 'react';
-import Item from './Item';
 
-const Column = () => {
+const Column = ({ title, children }) => {
   return (
     <div className='bg-gradient-to-b from-purple-400  rounded mt-5 shadow-lg mx-auto flex-no-shrink  px-4 mx-3'>
-      <Item />
-      <Item />
+      <div className='text-lg'>{title}</div>
+      {children}
     </div>
   );
 };
