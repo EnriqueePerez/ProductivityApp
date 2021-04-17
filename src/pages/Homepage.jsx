@@ -14,7 +14,10 @@ const Homepage = () => {
       status: 'To do',
       timeTaken: '01:30',
       finishedDate: '2/22/2021',
-      tags: 'user-facing',
+      tags: [
+        ['Data Science', 'red'],
+        ['Frontend', 'yellow'],
+      ],
     },
     {
       id: 2,
@@ -24,7 +27,10 @@ const Homepage = () => {
       status: 'To do',
       timeTaken: '01:30',
       finishedDate: '8/31/2020',
-      tags: 'Digitized',
+      tags: [
+        ['Data Science', 'red'],
+        ['Frontend', 'yellow'],
+      ],
     },
     {
       id: 3,
@@ -34,7 +40,10 @@ const Homepage = () => {
       status: 'To do',
       timeTaken: '01:30',
       finishedDate: '9/17/2020',
-      tags: 'regional',
+      tags: [
+        ['Data Science', 'red'],
+        ['Frontend', 'yellow'],
+      ],
     },
     {
       id: 4,
@@ -45,7 +54,10 @@ const Homepage = () => {
       status: 'To do',
       timeTaken: '01:30',
       finishedDate: '7/20/2020',
-      tags: 'mobile',
+      tags: [
+        ['Data Science', 'red'],
+        ['Frontend', 'yellow'],
+      ],
     },
     {
       id: 5,
@@ -56,7 +68,10 @@ const Homepage = () => {
       status: 'In progress',
       timeTaken: '01:30',
       finishedDate: '7/12/2020',
-      tags: 'dedicated',
+      tags: [
+        ['Data Science', 'red'],
+        ['Frontend', 'yellow'],
+      ],
     },
     {
       id: 6,
@@ -66,7 +81,10 @@ const Homepage = () => {
       status: 'In progress',
       timeTaken: '01:30',
       finishedDate: '1/21/2021',
-      tags: 'architecture',
+      tags: [
+        ['Data Science', 'red'],
+        ['Frontend', 'yellow'],
+      ],
     },
     {
       id: 7,
@@ -77,7 +95,10 @@ const Homepage = () => {
       status: 'In progress',
       timeTaken: '01:30',
       finishedDate: '3/9/2021',
-      tags: 'Stand-alone',
+      tags: [
+        ['Data Science', 'red'],
+        ['Frontend', 'yellow'],
+      ],
     },
     {
       id: 8,
@@ -88,7 +109,10 @@ const Homepage = () => {
       status: 'In progress',
       timeTaken: '01:30',
       finishedDate: '9/17/2020',
-      tags: 'scalable',
+      tags: [
+        ['Data Science', 'red'],
+        ['Frontend', 'yellow'],
+      ],
     },
     {
       id: 9,
@@ -99,7 +123,10 @@ const Homepage = () => {
       status: 'Done',
       timeTaken: '01:30',
       finishedDate: '11/11/2020',
-      tags: 'functionalities',
+      tags: [
+        ['Data Science', 'red'],
+        ['Frontend', 'yellow'],
+      ],
     },
     {
       id: 10,
@@ -110,7 +137,10 @@ const Homepage = () => {
       status: 'Done',
       timeTaken: '01:30',
       finishedDate: '6/21/2020',
-      tags: 'system-worthy',
+      tags: [
+        ['Data Science', 'red'],
+        ['Frontend', 'yellow'],
+      ],
     },
     {
       id: 11,
@@ -120,7 +150,10 @@ const Homepage = () => {
       status: 'Done',
       timeTaken: '01:30',
       finishedDate: '1/2/2021',
-      tags: 'Enhanced',
+      tags: [
+        ['Data Science', 'red'],
+        ['Frontend', 'yellow'],
+      ],
     },
     {
       id: 12,
@@ -130,7 +163,10 @@ const Homepage = () => {
       status: 'Done',
       timeTaken: '01:30',
       finishedDate: '4/3/2021',
-      tags: 'policy',
+      tags: [
+        ['Data Science', 'red'],
+        ['Frontend', 'yellow'],
+      ],
     },
   ]);
 
@@ -153,7 +189,7 @@ const Homepage = () => {
                 <Item key={item.id} {...item} />
               ))}
           </Column>
-          <Column title='In progress'>
+          <Column title='Doing'>
             {cards
               .filter((item) => item.status === 'In progress')
               .map((item) => (
