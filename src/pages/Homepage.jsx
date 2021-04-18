@@ -8,14 +8,6 @@ import mockOrder from '../mockData/tasksOrder.json';
 const Homepage = () => {
   const [tasksOrder, setTasksOrder] = useState();
   const [tasks, setTasks] = useState([]);
-  useEffect(() => {
-    setTasks(mockData);
-    setTasksOrder(mockOrder[0].tasksIds);
-    // fetch('../mockData/MOCK_DATA').then((response) => {
-    //   console.log(response.json());
-    //   return response.json();
-    // });
-  }, []);
 
   const onDragEnd = (result) => {
     //TODO: reorder column
@@ -32,15 +24,26 @@ const Homepage = () => {
       return;
     }
 
-    const newTaskIds = Array.from(tasksOrder);
-    console.log('newTaskIds', newTaskIds);
-    newTaskIds.splice(source.index, 1);
-    console.log('newTaskIds after deleting the index source', newTaskIds);
-    newTaskIds.splice(destination.index, 0, draggableId);
-    console.log('newTaskIds after adding the index destination', newTaskIds);
+    // const newTaskIds = Array.from(tasksOrder);
+    // console.log('newTaskIds', newTaskIds);
+    // newTaskIds.splice(source.index, 1);
+    // console.log('newTaskIds after deleting the index source', newTaskIds);
+    // newTaskIds.splice(destination.index, 0, draggableId);
+    // console.log('newTaskIds after adding the index destination', newTaskIds);
 
-    setTasksOrder(newTaskIds);
+    // setTasksOrder(newTaskIds);
   };
+
+  const fetchTasks = async () => {
+    await fetch('https://productivity-app-backend.herokuapp.com/tasks')
+      .then((response) => response.json())
+      .then((data) => setTasks(data));
+  };
+  useEffect(() => {
+    fetchTasks();
+    // setTasks(mockData);
+    // setTasksOrder(mockOrder[0].tasksIds);
+  }, []);
 
   return (
     <div>

@@ -23,7 +23,7 @@ const Column = ({ title, tasks }) => {
           <div ref={provided.innerRef} {...provided.droppableProps}>
             {tasks !== undefined
               ? tasks.map((task, index) => (
-                  <Task key={task.id} index={index} {...task} />
+                  <Task key={task._id} index={index} task={task} />
                 ))
               : null}
             {provided.placeholder}
