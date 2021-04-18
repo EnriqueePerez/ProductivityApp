@@ -1,6 +1,8 @@
 import React from 'react';
+import { Droppable } from 'react-beautiful-dnd';
+import Task from './Task';
 
-const Column = ({ title, children }) => {
+const Column = ({ title, tasks }) => {
   const defineColumnColor = () => {
     switch (title) {
       case 'To do':
@@ -16,7 +18,18 @@ const Column = ({ title, children }) => {
   return (
     <div className={defineColumnColor()}>
       <h2 className='mt-4 mb-2 text-xl'>{title}</h2>
-      {children}
+      <Droppable droppableId={title}>
+        {(provided) => (
+          <div ref={provided.innerRef} {...provided.droppableProps}>
+            {tasks !== undefined
+              ? tasks.map((task, index) => (
+                  <Task key={task.id} index={index} {...task} />
+                ))
+              : null}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
     </div>
   );
 };
