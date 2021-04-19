@@ -1,12 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { TasksProvider } from './hooks/TasksContext';
 import HomePage from './pages/Homepage';
 function App() {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route exact path='/' component={HomePage} />
-      </Switch>
+      <TasksProvider>
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+        </Switch>
+      </TasksProvider>
     </BrowserRouter>
   );
 }

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import bubble from '../assets/bubble.png';
 import tag from '../assets/tag.png';
 import { Draggable } from 'react-beautiful-dnd';
 import { Tags } from './Tags';
+import { TasksContext } from '../hooks/TasksContext';
 
 export const ToDoTask = ({
   _id,
@@ -15,9 +16,8 @@ export const ToDoTask = ({
   finishedDate,
   index,
 }) => {
-  const startTask = () => {
-    console.log('ayuda');
-  };
+  const { tasks, tasksDispatch } = useContext(TasksContext);
+
   return (
     <Draggable draggableId={_id} index={index}>
       {(provided) => (
@@ -35,15 +35,22 @@ export const ToDoTask = ({
           <div className='flex items-center my-2'>
             <img className='h-5 self-center' src={tag} alt='tag' />
             <div className='flex flex-wrap items-center'>
-              <Tags tags={tags} />
+              <Tags tags={tags} id={_id} />
             </div>
           </div>
           <div className='flex justify-end'>
-            <button className='text-red-500 border-2 border-red-500 text-sm hover:bg-red-700 text-white font-bold py-1 px-6 rounded-full'>
+            <button
+              onClick={() =>
+                tasksDispatch({ type: 'delete', payload: { _id: _id } })
+              }
+              className='text-red-500 border-2 border-red-500 text-sm hover:bg-red-700 text-white font-bold py-1 px-6 rounded-full'
+            >
               Delete Task
             </button>
             <button
-              onClick={startTask}
+              onClick={() =>
+                tasksDispatch({ type: 'start', payload: { _id: _id } })
+              }
               className='bg-red-500 text-sm hover:bg-red-500 text-white font-bold py-1 px-7 rounded-full ml-2'
             >
               Start

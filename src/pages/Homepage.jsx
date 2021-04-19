@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import Header from '../components/Header';
 import Column from '../components/Column';
-import mockData from '../mockData/mockData.json';
-import mockOrder from '../mockData/tasksOrder.json';
+import { TasksContext } from '../hooks/TasksContext';
 
 const Homepage = () => {
-  const [tasksOrder, setTasksOrder] = useState();
-  const [tasks, setTasks] = useState([]);
+  // const [tasksOrder, setTasksOrder] = useState();
+  const { tasks } = useContext(TasksContext);
+  // const [tasks, setTasks] = useState([]);
 
   const onDragEnd = (result) => {
     //TODO: reorder column
@@ -34,34 +34,48 @@ const Homepage = () => {
     // setTasksOrder(newTaskIds);
   };
 
-  const fetchTasks = async () => {
-    await fetch('https://productivity-app-backend.herokuapp.com/tasks')
-      .then((response) => response.json())
-      .then((data) => setTasks(data));
-  };
+  // const fetchTasks = async () => {
+  //   await fetch('https://productivity-app-backend.herokuapp.com/tasks')
+  //     .then((response) => response.json())
+  //     .then((data) => setTasks(data));
+  // // };
   useEffect(() => {
-    fetchTasks();
+    // fetchTasks();
     // setTasks(mockData);
     // setTasksOrder(mockOrder[0].tasksIds);
-  }, []);
+  }, [tasks]);
 
-  return (
+  return tasks === [] ? (
+    <p>Cargando...</p>
+  ) : (
     <div>
       <Header />
       <div className='container mx-auto'>
-        <div className='grid grid-cols-3 gap-8'>
+        <div className='grid grid-cols-3 gap-8 mb-5'>
           <DragDropContext onDragEnd={onDragEnd}>
             <Column
               title='To do'
-              tasks={tasks.filter((task) => task.status === 'To do')}
+              tasks={
+                tasks !== []
+                  ? tasks.filter((task) => task.status === 'To do')
+                  : null
+              }
             />
             <Column
               title='Doing'
-              tasks={tasks.filter((task) => task.status === 'Doing')}
+              tasks={
+                tasks !== []
+                  ? tasks.filter((task) => task.status === 'Doing')
+                  : null
+              }
             />
             <Column
               title='Done'
-              tasks={tasks.filter((task) => task.status === 'Done')}
+              tasks={
+                tasks !== []
+                  ? tasks.filter((task) => task.status === 'Done')
+                  : null
+              }
             />
           </DragDropContext>
         </div>
