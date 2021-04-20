@@ -6,11 +6,11 @@ const Column = ({ title, tasks }) => {
   const defineColumnColor = () => {
     switch (title) {
       case 'To do':
-        return 'bg-gradient-to-b from-red-200 via-transparent to-transparent rounded-xl shadow-lg px-5';
+        return 'bg-gradient-to-b from-red-200 via-transparent to-transparent rounded-xl shadow-lg px-5 pb-3';
       case 'Doing':
-        return 'bg-gradient-to-b from-yellow-200 via-transparent to-transparent rounded-xl shadow-lg px-5';
+        return 'bg-gradient-to-b from-yellow-200 via-transparent to-transparent rounded-xl shadow-lg px-5 pb-3';
       case 'Done':
-        return 'bg-gradient-to-b from-green-200 via-transparent to-transparent rounded-xl shadow-lg px-5';
+        return 'bg-gradient-to-b from-green-200 via-transparent to-transparent rounded-xl shadow-lg px-5 pb-3';
       default:
         break;
     }

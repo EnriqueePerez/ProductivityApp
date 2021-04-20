@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer } from 'react';
 
 export const TasksContext = React.createContext();
 
@@ -20,10 +20,22 @@ const reducer = (state, action) => {
       return state.filter((task) => task._id !== action.payload._id);
     case 'delete':
       console.log('borrando tarea');
+      deleteTask(action.payload._id);
       return state.filter((task) => task._id !== action.payload._id);
     default:
       return state;
   }
+};
+
+const deleteTask = async (id) => {
+  await fetch(`https://productivity-app-backend.herokuapp.com/tasks/${id}`, {
+    method: 'DELETE',
+    mode: 'cors',
+  })
+    .then((response) => console.log(response.status))
+    .catch((error) => {
+      console.error('error deleting tasks', error);
+    });
 };
 
 export const TasksProvider = ({ children }) => {

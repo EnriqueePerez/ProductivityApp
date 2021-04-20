@@ -3,11 +3,15 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import Header from '../components/Header';
 import Column from '../components/Column';
 import { TasksContext } from '../hooks/TasksContext';
+import { CreateTaskModal } from '../components/CreateTaskModal';
 
 const Homepage = () => {
-  // const [tasksOrder, setTasksOrder] = useState();
   const { tasks } = useContext(TasksContext);
-  // const [tasks, setTasks] = useState([]);
+  const [modalState, setModalState] = useState(false);
+
+  const changeModalStatus = () => {
+    setModalState(!modalState);
+  };
 
   const onDragEnd = (result) => {
     //TODO: reorder column
@@ -34,22 +38,23 @@ const Homepage = () => {
     // setTasksOrder(newTaskIds);
   };
 
-  // const fetchTasks = async () => {
-  //   await fetch('https://productivity-app-backend.herokuapp.com/tasks')
-  //     .then((response) => response.json())
-  //     .then((data) => setTasks(data));
-  // // };
-  useEffect(() => {
-    // fetchTasks();
-    // setTasks(mockData);
-    // setTasksOrder(mockOrder[0].tasksIds);
-  }, [tasks]);
+  useEffect(() => {}, [tasks]);
 
   return tasks === [] ? (
     <p>Cargando...</p>
   ) : (
     <div>
       <Header />
+      <CreateTaskModal isOpen={modalState} onRequestClose={changeModalStatus} />
+      <div className='flex justify-end mb-2 mr-5'>
+        <button
+          className='bg-green-500 rounded p-1 '
+          type='button'
+          onClick={() => changeModalStatus()}
+        >
+          Agregar tarea
+        </button>
+      </div>
       <div className='container mx-auto'>
         <div className='grid grid-cols-3 gap-8 mb-5'>
           <DragDropContext onDragEnd={onDragEnd}>

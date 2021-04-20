@@ -1,9 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import bubble from '../assets/bubble.png';
 import tag from '../assets/tag.png';
+import pencil from '../assets/pencil@2x.png';
+import clock from '../assets/clock.png';
 import { Draggable } from 'react-beautiful-dnd';
 import { Tags } from './Tags';
 import { TasksContext } from '../hooks/TasksContext';
+import { EditTaskModal } from './EditTaskModal';
 
 export const ToDoTask = ({
   _id,
@@ -16,7 +19,22 @@ export const ToDoTask = ({
   finishedDate,
   index,
 }) => {
+  const tarea = {
+    _id,
+    title,
+    details,
+    tags,
+    dueDate,
+    status,
+    timeTaken,
+    finishedDate,
+  };
+  const [modalState, setModalState] = useState(false);
   const { tasks, tasksDispatch } = useContext(TasksContext);
+
+  const changeModalStatus = () => {
+    setModalState(!modalState);
+  };
 
   return (
     <Draggable draggableId={_id} index={index}>
@@ -27,10 +45,32 @@ export const ToDoTask = ({
           ref={provided.innerRef}
           className='bg-white pt-4 pl-4 pr-3 pb-3 rounded-xl mt-3 shadow-lg hover:bg-gray-100'
         >
-          <h3 className='ml-7 text-base font-bold'>{title}</h3>
+          <EditTaskModal
+            isOpen={modalState}
+            onRequestClose={changeModalStatus}
+            task={tarea}
+            tagName={tags[0][0]}
+            tagColor={tags[0][1]}
+          />
+          <div className='flex justify-between'>
+            <h3 className='ml-7 text-base font-bold'>{title}</h3>
+            <img
+              className='h-5'
+              src={pencil}
+              alt='Edit Task'
+              onClick={() => changeModalStatus()}
+            />
+          </div>
           <div className='flex my-2'>
             <img className='h-5' src={bubble} alt='bubble' />
             <p className='bg-red-200 rounded-xl p-2 ml-2 text-xs'>{details}</p>
+          </div>
+          <div className='flex my-2 items-center'>
+            <img className='h-5 mr-2' src={clock} alt='clock' />
+            <div className='text-xs'>Due date:</div>
+            <div className='ml-1 text-xs'>
+              {new Date(dueDate).toLocaleDateString()}
+            </div>
           </div>
           <div className='flex items-center my-2'>
             <img className='h-5 self-center' src={tag} alt='tag' />
