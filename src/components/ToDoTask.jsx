@@ -30,7 +30,7 @@ export const ToDoTask = ({
     finishedDate,
   };
   const [modalState, setModalState] = useState(false);
-  const { tasks, tasksDispatch } = useContext(TasksContext);
+  const { tasksDispatch } = useContext(TasksContext);
 
   const changeModalStatus = () => {
     setModalState(!modalState);
